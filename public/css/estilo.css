@@ -1,0 +1,8 @@
+.row{
+	margin-bottom: 10px;
+}
+
+a:link, a:visited, a:hover {
+	text-decoration: none;
+	color: black;
+}
