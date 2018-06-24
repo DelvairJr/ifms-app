@@ -61,19 +61,19 @@ export default class HorarioPE extends Component {
         event.preventDefault()
 
         const dia_semana = this.dia_semana.value
-        const key_professor = this.professor.value
+        const professor = this.professor.value
         const local = this.local.value
         const horas_inicio = this.horas_inicio.value
         const horas_termino = this.horas_termino.value
         
         let horario = ''
 
-        const professor = {
+       /*  const professor = {
             [key_professor]: true
         }
 
 
-        /*  const horario = {
+         const horario = {
               [this.state.key.key]:true
           }*/
 
@@ -90,7 +90,7 @@ export default class HorarioPE extends Component {
                 console.log(error)
             })
             :
-            base.update('horariosPe/' + this.state.key.key + '/professores', {
+            base.update('horariosPe/' + this.state.key.key, {
                 data: {
                     dia_semana,
                     professor,
@@ -102,11 +102,6 @@ export default class HorarioPE extends Component {
             }).catch(error => {
                 console.log(error)
             })
-
-
-        console.log(horario.path)
-
-        
 
 
         this.dia_semana.value = ''
@@ -149,7 +144,7 @@ export default class HorarioPE extends Component {
     handleOptProfessores = (posicao) => {
         const professor = this.state.professores[posicao]
         return (
-            <option key={professor.key} value={professor.key}>{professor.nome}</option>
+            <option key={professor.key} >{professor.nome}</option>
         )
     }
 
@@ -238,14 +233,14 @@ export default class HorarioPE extends Component {
                             </div>
                         </div>
                         {
-                            /* Object
+                             Object
                                  .keys(this.state.horariosPe)
                                  .map(key => {
                                      if (this.state.horariosPe[key].professor.toUpperCase()
                                          .includes(this.search.value.toUpperCase())) {
                                          return this.renderHorariosPe(key, this.state.horariosPe[key])
                                      }
-                                 })*/
+                                 })
                         }
                     </div>
                 </div>
