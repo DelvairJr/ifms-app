@@ -7,6 +7,7 @@ export default class CalendarioProvas extends Component {
         super(props)
         this.state = {
             calendarioProvas: [],
+            cursos: [],
             key: null,
             serch: ''
         }
@@ -21,6 +22,14 @@ export default class CalendarioProvas extends Component {
             context: this,
             state: 'calendarioProvas',
             asArray: true
+        })
+        base.syncState('cursos', {
+            context: this,
+            state: 'cursos',
+            asArray: true,
+            queries: {
+                orderByChild: 'nome_abreviado'
+            }
         })
     }
 
@@ -116,6 +125,14 @@ export default class CalendarioProvas extends Component {
         )
     }
 
+    handleOptCursos = (posicao) => {
+        const cursos = this.state.cursos[posicao]
+        return (
+            <option key={cursos.key} >{cursos.nome_abreviado}</option>
+        )
+    }
+
+
     handleSearch = () => {
         this.setState({
             search: this.search.value
@@ -137,15 +154,16 @@ export default class CalendarioProvas extends Component {
                     <div className="form-row">
                         <div className="form-group col-md-4">
 
-                            <InputField
-                                refValue={node => this.turma = node}
-                                idValue='turma'
-                                typeValue='text'
-                                requiredValue={true}
-                                textValue='Turma: ' />
+                            <label className="col-form-label" htmlFor="Turma">Turma: </label>
+                            <select className="form-control" ref={node => this.turma = node} id="turma" required="true">
+                                {Object
+                                    .keys(this.state.cursos)
+                                    .map(posicao => this.handleOptCursos(posicao))
+                                }
+                            </select>
                         </div>
 
-                        <div className="form-group col-md-2">
+                        <div className="form-group col-md-1">
                             <label className="col-form-label" htmlFor="semestre">Semestre: </label>
                             <select className="form-control" ref={node => this.semestre = node} id="semestre" required="true">
                                 {semestre}
@@ -153,7 +171,7 @@ export default class CalendarioProvas extends Component {
 
                         </div>
 
-                        <div className="form-group col-md-2">
+                        <div className="form-group col-md-3">
 
                             <InputField
                                 refValue={node => this.dataProva = node}
@@ -174,7 +192,13 @@ export default class CalendarioProvas extends Component {
                         </div>
                     </div>
 
-                    <button className='btn btn-primary' type='submit'>Salvar</button>
+                    <div className="row justify-content-end">
+                        <div className="col-1 align-self-center">
+                            <button className='btn btn-primary' type='submit'>Salvar</button>
+                        </div>
+
+                    </div>
+
                 </form>
 
 
