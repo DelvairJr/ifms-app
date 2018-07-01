@@ -2,7 +2,7 @@ import React from 'react'
 
 const InputField = (props) => {
 
-  const { refValue, keyUp, idValue, typeValue, requiredValue, textValue, spanWidth } = props
+  const { refValue, keyUp, idValue, typeValue, requiredValue, textValue } = props
 
   return (
     <div >

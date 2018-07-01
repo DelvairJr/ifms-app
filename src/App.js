@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
 import { Switch, BrowserRouter, Route } from 'react-router-dom'
+//C:\code\tads\dispMoveis\ifms-app\src\recursos\css\bootstrap.min.css
+import './recursos/css/bootstrap.min.css'
+import './recursos/css/estilo.css'
 
 import Login from './admin/Login'
 import Admin from './admin/Admin'
-import CalendarioProvasMobile from './calendarioProvas/CalendarioProvasMobile'
-import ProfessorMobile from '../src/professor/ProfessorMobile'
-import HorarioPeMobile from '../src/horarioPe/HorarioPeMobile'
+import Footer from './components/Footer'
 
 class App extends Component {
   render() {
@@ -18,6 +19,8 @@ class App extends Component {
             <Route path='/admin' component={Admin} />
           </Switch>
         </BrowserRouter>
+
+        <Footer />
       </div>
     )
   }

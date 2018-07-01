@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 
 import { base } from '../base'
 import InputField from '../components/InputField'
@@ -22,6 +23,14 @@ export default class HorarioPeMobile extends Component {
     })
   }
 
+  removerHorarioPe(key) {
+    let msg = window.confirm('Deseja excluir este registro?')
+    if (msg) {
+      base.remove('horariosPe/' + key, error => {
+        console.log(error)
+      })
+    }
+  }
 
   renderHorariosPe(key, horariosPe) {
     return (
@@ -29,14 +38,25 @@ export default class HorarioPeMobile extends Component {
         <div className="col-12">
           <div className="card text-center">
             <div className="card-header">
-              <h6 className="card-title mb-2">Professor: {horariosPe.professor}</h6>
+              <h5 className="card-title">Professor: {horariosPe.professor}</h5>
             </div>
             <div className="card-body">
-
-              <h6 className="card-subtitle mb-2">{horariosPe.dia_semana}</h6>
+              <h6 className="card-subtitle text-muted mb-2">Dia: {horariosPe.dia_semana}</h6>
 
               <p className="card-text">Local: {horariosPe.local}</p>
               <p className="card-text">Horário: {`${horariosPe.horas_inicio} às ${horariosPe.horas_termino}`}</p>
+              <div className="card-body">
+                <div className="row">
+                  <Link to={`horariospe/${horariosPe.key}`} className="btn btn-lg btn-link ">Editar</Link>
+
+                </div>
+                <div className="row">
+                  <button className="btn btn-lg btn-danger" onClick={() => this.removerHorarioPe(this.state.horariosPe[key].key)}>
+                    Excluir
+                      </button>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
@@ -77,6 +97,9 @@ export default class HorarioPeMobile extends Component {
               }
             })
         }
+        <div className="row">
+          <div className="col-12"><a href="/admin/horariospe" className='btn btn-default btn-lg'>Voltar</a></div>
+        </div>
       </div>
     )
   }

@@ -175,6 +175,8 @@ export default class Curso extends Component {
                         }
                     </div>
                 </div>
+
+                
             </div >
         )
     }

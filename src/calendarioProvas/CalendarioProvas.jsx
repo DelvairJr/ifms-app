@@ -115,7 +115,9 @@ export default class CalendarioProvas extends Component {
                                 </button>
                             <button className="btn btn-sm btn-danger card-link" onClick={() => this.removerCalendarioProvas(this.state.calendarioProvas[key].key)}>
                                 Excluir
-                                </button>
+                            </button>
+
+
                         </div>
 
                     </div>
@@ -123,6 +125,11 @@ export default class CalendarioProvas extends Component {
             </div>
 
         )
+    }
+
+
+    modal() {
+
     }
 
     handleOptCursos = (posicao) => {
@@ -147,6 +154,7 @@ export default class CalendarioProvas extends Component {
         return (
 
             <div className="col-12">
+
                 <h3>Horário de provas</h3>
 
                 <form onSubmit={this.updateCalendarioProvas}>
@@ -232,6 +240,8 @@ export default class CalendarioProvas extends Component {
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         )
     }

@@ -3,27 +3,14 @@ import React, { Component } from 'react'
 export default class NavBar extends Component {
     render() {
         return (
-            <nav class="navbar navbar-expand-lg  navbar-dark bg-dark">
-                <a class="navbar-brand" href="/admin">IFMS</a>
-
-                <div class="collapse navbar-collapse" id="navbarNav">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/Cursos">Cursos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/horario-pe">Horario de PE</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/admin/professores">Professores</a>
-                        </li>
-                        <li class="nav-item navbar-right">
-                            <a class="nav-link" href="/admin/calendario-provas">Provas</a>
-                        </li>
-                    </ul>
-
+            <nav class="dropdown">
+                <button class="dropbtn">Ifms</button>
+                <div class="dropdown-content">
+                    <a href="/admin/Cursos">Cursos</a>
+                    <a href="/admin/horariospe">Horario de Pe</a>
+                    <a href="/admin/professores">Professores</a>
+                    <a href="/admin/calendarioProvas">Provas</a>
                 </div>
-            </nav>
-        )
+            </nav>)
     }
 }

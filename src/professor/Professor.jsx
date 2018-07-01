@@ -143,8 +143,11 @@ export default class Professor extends Component {
                             <smal id="emailHelp" className="form-text text-muted">Ex.: seuemail@gmail.com</smal>
                         </div>
                     </div>
-
-                    <button className='btn btn-primary' type='submit'>Salvar</button>
+                    <div className="form-row">
+                        <div className="form-group col-md-12">
+                            <button className='btn btn-primary' type='submit'>Salvar</button>
+                        </div>
+                    </div>
                 </form>
 
 
