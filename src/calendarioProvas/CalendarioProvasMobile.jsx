@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-
+import { Link } from 'react-router-dom'
 import { base } from '../base'
+
 import InputField from '../components/InputField'
 
 export default class CalendarioProvasMobile extends Component {
@@ -23,6 +24,15 @@ export default class CalendarioProvasMobile extends Component {
     }
 
 
+    removerCalendarioProvas(key) {
+        let msg = window.confirm('Deseja excluir este registro?')
+        if (msg) {
+            base.remove('calendarioProvas/' + key, error => {
+                console.log(error)
+            })
+        }
+    }
+
     renderCalendarioProvas(key, calendarioProvas) {
 
         return (
@@ -30,12 +40,22 @@ export default class CalendarioProvasMobile extends Component {
                 <div className="col-12">
                     <div className="card border-dark text-center">
                         <div className="card-header">
-                            Turma: {`${calendarioProvas.turma} - ${calendarioProvas.semestre}`}
+                            <h5>Turma: {`${calendarioProvas.turma} - ${calendarioProvas.semestre}`} </h5>
                         </div>
                         <div className="card-body">
                             <h6 className="card-title mb-2">Data: {calendarioProvas.dataProva}</h6>
                             <p>Disciplina: {calendarioProvas.disciplina}</p>
 
+                            <div className="row">
+                                <div className="col-6">
+                                    <Link to={`calendarioprovas/${calendarioProvas.key}`} className="btn btn-lg btn-link ">Editar</Link>
+                                </div>
+                                <div className="col-6">
+                                    <button className="btn btn-lg btn-danger" onClick={() => this.removerCalendarioProvas(this.state.calendarioProvas[key].key)}>
+                                        Excluir
+                                </button>
+                                </div>
+                            </div>
 
                         </div>
                     </div>

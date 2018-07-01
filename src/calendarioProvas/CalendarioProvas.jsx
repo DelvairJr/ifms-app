@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import { base } from '../base'
+
 import InputField from '../components/InputField'
 
 export default class CalendarioProvas extends Component {
@@ -12,17 +14,24 @@ export default class CalendarioProvas extends Component {
             serch: ''
         }
 
-        this.renderCalendarioProvas = this.renderCalendarioProvas.bind(this)
-        this.removerCalendarioProvas = this.removerCalendarioProvas.bind(this)
         this.updateCalendarioProvas = this.updateCalendarioProvas.bind(this)
     }
 
-    componentDidMount() {
-        base.syncState('calendarioProvas', {
-            context: this,
-            state: 'calendarioProvas',
-            asArray: true
-        })
+    componentDidMount = async () => {
+        console.log(this.props.match.params.id)
+        if (this.props.match.params.id) {
+            await base.fetch('calendarioProvas/' + this.props.match.params.id, {
+                context: this,
+                asArray: false,
+                then: (data) => {
+                    this.setState({
+                        calendarioProvas: data
+                    })
+                }
+            })
+
+            await this.getCalendarioProvas()
+        }
         base.syncState('cursos', {
             context: this,
             state: 'cursos',
@@ -41,7 +50,7 @@ export default class CalendarioProvas extends Component {
         const dataProva = this.dataProva.value
         const disciplina = this.disciplina.value
 
-        !this.state.key ?
+        !this.state.calendarioProvas.turma ?
             base.push('calendarioProvas', {
                 data: {
                     turma,
@@ -53,7 +62,7 @@ export default class CalendarioProvas extends Component {
                 console.log(error)
             })
             :
-            base.update('calendarioProvas/' + this.state.key.key, {
+            base.update('calendarioProvas/' + this.props.match.params.id, {
                 data: {
                     turma,
                     semestre,
@@ -76,26 +85,15 @@ export default class CalendarioProvas extends Component {
         this.turma.focus()
     }
 
-    getCalendarioProvas(key) {
-        const prova = this.state.calendarioProvas[key]
+    getCalendarioProvas = () => {
+        const prova = this.state.calendarioProvas
         this.turma.value = prova.turma
         this.semestre.value = prova.semestre
         this.dataProva.value = prova.dataProva
         this.disciplina.value = prova.disciplina
 
-        this.setState({
-            key: this.state.calendarioProvas[key]
-        })
     }
 
-    removerCalendarioProvas(key) {
-        let msg = window.confirm('Deseja excluir este registro?')
-        if (msg) {
-            base.remove('calendarioProvas/' + key, error => {
-                console.log(error)
-            })
-        }
-    }
 
     renderCalendarioProvas(key, calendarioProvas) {
 
@@ -127,11 +125,6 @@ export default class CalendarioProvas extends Component {
         )
     }
 
-
-    modal() {
-
-    }
-
     handleOptCursos = (posicao) => {
         const cursos = this.state.cursos[posicao]
         return (
@@ -139,12 +132,6 @@ export default class CalendarioProvas extends Component {
         )
     }
 
-
-    handleSearch = () => {
-        this.setState({
-            search: this.search.value
-        })
-    }
 
     render() {
         let semestre = []
@@ -200,48 +187,18 @@ export default class CalendarioProvas extends Component {
                         </div>
                     </div>
 
-                    <div className="row justify-content-end">
-                        <div className="col-1 align-self-center">
-                            <button className='btn btn-primary' type='submit'>Salvar</button>
-                        </div>
-
+                    <div className="form-row">
+                        <button className='btn btn-success btn-lg' type='submit'>Salvar</button>
                     </div>
 
                 </form>
 
 
+
                 <div className="row">
-                    <div className="col-12">
-                        <h4>Provas</h4>
-
-                        <div className="row">
-                            <div className="col-12">
-                                <InputField
-                                    refValue={node => this.search = node}
-                                    idValue='search'
-                                    typeValue='text'
-                                    requiredValue={true}
-                                    textValue='Pesquisa por turma: '
-                                    keyUp={this.handleSearch} />
-                            </div>
-                        </div>
-                        <div className="row" >
-                            {
-                                Object
-                                    .keys(this.state.calendarioProvas)
-                                    .map(key => {
-                                        if (this.state.calendarioProvas[key].turma.toUpperCase()
-                                            .includes(this.search.value.toUpperCase())) {
-                                            return this.renderCalendarioProvas(key, this.state.calendarioProvas[key])
-                                        }
-
-                                    })
-                            }
-                        </div>
-                    </div>
+                <Link className='btn btn-default btn-lg' to={"/admin/m-calendarioprovas"} >Lista de Provas</Link>
                 </div>
 
-                
             </div>
         )
     }

@@ -49,7 +49,8 @@ export default class HorarioPeMobile extends Component {
 
                 <div className="row">
                   <div className="col-6">
-                    <Link to={`horariospe/${horariosPe.key}`} className="btn btn-lg btn-link ">Editar</Link></div>
+                    <Link to={`horariospe/${horariosPe.key}`} className="btn btn-lg btn-link ">Editar</Link>
+                  </div>
                   <div className="col-6">
                     <button className="btn btn-lg btn-danger" onClick={() => this.removerHorarioPe(this.state.horariosPe[key].key)}>
                       Excluir

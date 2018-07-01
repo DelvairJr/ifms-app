@@ -9,7 +9,7 @@ export default class NavBar extends Component {
                     <a href="/admin/Cursos">Cursos</a>
                     <a href="/admin/horariospe">Horario de Pe</a>
                     <a href="/admin/professores">Professores</a>
-                    <a href="/admin/calendarioProvas">Provas</a>
+                    <a href="/admin/calendarioprovas">Provas</a>
                 </div>
             </nav>)
     }
