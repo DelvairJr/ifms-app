@@ -71,11 +71,14 @@ export default class Admin extends Component {
           <Route path={`${this.props.match.url}/horariospe/:id`} component={ HorarioPe } />
           <Route exact={true} path={`${this.props.match.url}/horariospe`} component={HorarioPe} />
           <Route exact={true} path={`${this.props.match.url}/m-horariospe`} component={HorarioPeMobile} />
-          
+
+          <Route path={`${this.props.match.url}/professores/:id`} component={ Professor } />
           <Route exact={true} path={`${this.props.match.url}/professores`} component={Professor} />
           <Route exact={true} path={`${this.props.match.url}/m-professores`} component={ProfessorMob} />
+
           <Route exact={true} path={`${this.props.match.url}/calendarioProvas`} component={CalendarioProvas} />
           <Route exact={true} path={`${this.props.match.url}/m-calendarioProvas`} component={CalendarioProvasMob} />
+          
           <Route exact={true} path={`${this.props.match.url}/cursos`} component={Cursos} />
           <Route exact={true} path={`${this.props.match.url}/horario-de-aula`} component={HorarioDeAula} />
         </div>

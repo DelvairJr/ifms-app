@@ -36,7 +36,7 @@ export default class HorarioPeMobile extends Component {
     return (
       <div className="row" key={key}>
         <div className="col-12">
-          <div className="card text-center">
+          <div className="card border-success text-center">
             <div className="card-header">
               <h5 className="card-title">Professor: {horariosPe.professor}</h5>
             </div>
@@ -46,14 +46,16 @@ export default class HorarioPeMobile extends Component {
               <p className="card-text">Local: {horariosPe.local}</p>
               <p className="card-text">Horário: {`${horariosPe.horas_inicio} às ${horariosPe.horas_termino}`}</p>
               <div className="card-body">
-                <div className="row">
-                  <Link to={`horariospe/${horariosPe.key}`} className="btn btn-lg btn-link ">Editar</Link>
 
-                </div>
                 <div className="row">
-                  <button className="btn btn-lg btn-danger" onClick={() => this.removerHorarioPe(this.state.horariosPe[key].key)}>
-                    Excluir
-                      </button>
+                  <div className="col-6">
+                    <Link to={`horariospe/${horariosPe.key}`} className="btn btn-lg btn-link ">Editar</Link></div>
+                  <div className="col-6">
+                    <button className="btn btn-lg btn-danger" onClick={() => this.removerHorarioPe(this.state.horariosPe[key].key)}>
+                      Excluir
+                    </button>
+                  </div>
+
                 </div>
               </div>
 
